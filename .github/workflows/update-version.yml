@@ -1,0 +1,51 @@
+name: Update Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project slug'
+        required: true
+      version:
+        description: 'Version string (must already exist, e.g. v1.0.0)'
+        required: true
+      changelog:
+        description: 'Replacement changelog (newline-delimited; leave blank to keep existing)'
+        required: false
+      asset_source:
+        description: 'New source asset URL (leave blank to keep existing)'
+        required: false
+      asset_binary:
+        description: 'New binary asset URL (leave blank to keep existing)'
+        required: false
+      repo_tag_github:
+        description: 'New GitHub tag URL (leave blank to keep existing)'
+        required: false
+      repo_tag_gitea:
+        description: 'New Gitea tag URL (leave blank to keep existing)'
+        required: false
+      license:
+        description: 'New license (leave blank to keep existing)'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Version
+        uses: ddproxy/registry-actions/actions/update-version@v0.1.0
+        with:
+          project_name: ${{ github.event.inputs.project_name }}
+          version: ${{ github.event.inputs.version }}
+          changelog: ${{ github.event.inputs.changelog }}
+          asset_source: ${{ github.event.inputs.asset_source }}
+          asset_binary: ${{ github.event.inputs.asset_binary }}
+          repo_tag_github: ${{ github.event.inputs.repo_tag_github }}
+          repo_tag_gitea: ${{ github.event.inputs.repo_tag_gitea }}
+          license: ${{ github.event.inputs.license }}
+          registry_repo: ${{ github.event.repository.name }}
+          registry_owner: ${{ github.event.repository.owner.login }}
+          github_token: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}

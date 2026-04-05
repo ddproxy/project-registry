@@ -1,0 +1,47 @@
+name: Update Project
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project slug (must already exist in the registry)'
+        required: true
+      display_name:
+        description: 'New display name (leave blank to keep existing)'
+        required: false
+      description:
+        description: 'New description (leave blank to keep existing)'
+        required: false
+      repo_github:
+        description: 'New GitHub URL (leave blank to keep existing)'
+        required: false
+      repo_gitea:
+        description: 'New Gitea URL (leave blank to keep existing)'
+        required: false
+      tags:
+        description: 'Replacement comma-separated tags (leave blank to keep existing)'
+        required: false
+      license:
+        description: 'New license (leave blank to keep existing)'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Project
+        uses: ddproxy/registry-actions/actions/update-project@v0.1.0
+        with:
+          project_name: ${{ github.event.inputs.project_name }}
+          display_name: ${{ github.event.inputs.display_name }}
+          description: ${{ github.event.inputs.description }}
+          repo_github: ${{ github.event.inputs.repo_github }}
+          repo_gitea: ${{ github.event.inputs.repo_gitea }}
+          tags: ${{ github.event.inputs.tags }}
+          license: ${{ github.event.inputs.license }}
+          registry_repo: ${{ github.event.repository.name }}
+          registry_owner: ${{ github.event.repository.owner.login }}
+          github_token: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
