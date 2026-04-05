@@ -27,6 +27,9 @@ on:
         required: false
         default: 'MIT'
 
+permissions:
+  contents: write
+
 jobs:
   add-project:
     runs-on: ubuntu-latest
