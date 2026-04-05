@@ -1,0 +1,49 @@
+name: Add Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project slug'
+        required: true
+      version:
+        description: 'Version string'
+        required: true
+      changelog:
+        description: 'Changelog entries'
+        required: true
+      asset_source:
+        description: 'Source asset URL'
+        required: true
+      asset_binary:
+        description: 'Binary asset URL'
+        required: false
+      repo_tag_github:
+        description: 'GitHub Tag URL'
+        required: false
+      repo_tag_gitea:
+        description: 'Gitea Tag URL'
+        required: false
+      license:
+        description: 'License'
+        required: false
+        default: 'MIT'
+
+jobs:
+  add-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Version Action
+        uses: ddproxy/registry-actions/actions/add-version@main
+        with:
+          project_name: ${{ github.event.inputs.project_name }}
+          version: ${{ github.event.inputs.version }}
+          changelog: ${{ github.event.inputs.changelog }}
+          asset_source: ${{ github.event.inputs.asset_source }}
+          asset_binary: ${{ github.event.inputs.asset_binary }}
+          repo_tag_github: ${{ github.event.inputs.repo_tag_github }}
+          repo_tag_gitea: ${{ github.event.inputs.repo_tag_gitea }}
+          license: ${{ github.event.inputs.license }}
+          registry_repo: ${{ github.event.repository.name }}
+          registry_owner: ${{ github.event.repository.owner.login }}
+          github_token: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}

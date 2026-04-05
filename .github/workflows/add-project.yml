@@ -1,0 +1,46 @@
+name: Add Project
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project slug'
+        required: true
+      display_name:
+        description: 'Display name'
+        required: true
+      description:
+        description: 'Project description'
+        required: true
+      repo_github:
+        description: 'GitHub Repo URL'
+        required: false
+      repo_gitea:
+        description: 'Gitea Repo URL'
+        required: false
+      tags:
+        description: 'Comma-separated tags'
+        required: false
+        default: 'project'
+      license:
+        description: 'License'
+        required: false
+        default: 'MIT'
+
+jobs:
+  add-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Project Action
+        uses: ddproxy/registry-actions/actions/add-project@main
+        with:
+          project_name: ${{ github.event.inputs.project_name }}
+          display_name: ${{ github.event.inputs.display_name }}
+          description: ${{ github.event.inputs.description }}
+          repo_github: ${{ github.event.inputs.repo_github }}
+          repo_gitea: ${{ github.event.inputs.repo_gitea }}
+          tags: ${{ github.event.inputs.tags }}
+          license: ${{ github.event.inputs.license }}
+          registry_repo: ${{ github.event.repository.name }}
+          registry_owner: ${{ github.event.repository.owner.login }}
+          github_token: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
