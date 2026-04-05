@@ -1,39 +1,39 @@
-name: Update Project
+name: Upsert Project
 
 on:
   workflow_dispatch:
     inputs:
       project_name:
-        description: 'Project slug (must already exist in the registry)'
+        description: 'Project slug (lowercase, hyphens allowed)'
         required: true
       display_name:
-        description: 'New display name (leave blank to keep existing)'
+        description: 'Display name (auto-generated on create if blank)'
         required: false
       description:
-        description: 'New description (leave blank to keep existing)'
+        description: 'Project description'
         required: false
       repo_github:
-        description: 'New GitHub URL (leave blank to keep existing)'
+        description: 'GitHub repository URL'
         required: false
       repo_gitea:
-        description: 'New Gitea URL (leave blank to keep existing)'
+        description: 'Gitea repository URL'
         required: false
       tags:
-        description: 'Replacement comma-separated tags (leave blank to keep existing)'
+        description: 'Comma-separated tags'
         required: false
       license:
-        description: 'New license (leave blank to keep existing)'
+        description: 'License identifier (defaults to MIT on create)'
         required: false
 
 permissions:
   contents: write
 
 jobs:
-  update-project:
+  upsert-project:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Project
-        uses: ddproxy/registry-actions/actions/update-project@v0.1.0
+      - name: Upsert Project
+        uses: ddproxy/registry-actions/actions/upsert-project@v0.1.0
         with:
           project_name: ${{ github.event.inputs.project_name }}
           display_name: ${{ github.event.inputs.display_name }}

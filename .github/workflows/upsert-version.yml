@@ -1,4 +1,4 @@
-name: Update Version
+name: Upsert Version
 
 on:
   workflow_dispatch:
@@ -7,36 +7,36 @@ on:
         description: 'Project slug'
         required: true
       version:
-        description: 'Version string (must already exist, e.g. v1.0.0)'
+        description: 'Version string (e.g. v1.0.0)'
         required: true
       changelog:
-        description: 'Replacement changelog (newline-delimited; leave blank to keep existing)'
+        description: 'Changelog entries, one per line (required on create)'
         required: false
       asset_source:
-        description: 'New source asset URL (leave blank to keep existing)'
+        description: 'Source asset URL (required on create)'
         required: false
       asset_binary:
-        description: 'New binary asset URL (leave blank to keep existing)'
+        description: 'Binary asset URL'
         required: false
       repo_tag_github:
-        description: 'New GitHub tag URL (leave blank to keep existing)'
+        description: 'GitHub tag URL'
         required: false
       repo_tag_gitea:
-        description: 'New Gitea tag URL (leave blank to keep existing)'
+        description: 'Gitea tag URL'
         required: false
       license:
-        description: 'New license (leave blank to keep existing)'
+        description: 'License identifier (defaults to MIT on create)'
         required: false
 
 permissions:
   contents: write
 
 jobs:
-  update-version:
+  upsert-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Version
-        uses: ddproxy/registry-actions/actions/update-version@v0.1.0
+      - name: Upsert Version
+        uses: ddproxy/registry-actions/actions/upsert-version@v0.1.0
         with:
           project_name: ${{ github.event.inputs.project_name }}
           version: ${{ github.event.inputs.version }}
