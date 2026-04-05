@@ -1,0 +1,14 @@
+{
+  "name": "registry-client",
+  "displayName": "Registry Client",
+  "description": "Project Registry Client",
+  "tags": [
+    "project"
+  ],
+  "repo": {
+    "github": "https://github.com/ddproxy/registry-client",
+    "gitea": null
+  },
+  "latestVersion": "v0.0.0",
+  "license": "MIT"
+}
