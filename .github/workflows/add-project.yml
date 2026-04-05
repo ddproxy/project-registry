@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add Project Action
-        uses: ddproxy/registry-actions/actions/add-project@main
+        uses: ddproxy/registry-actions/actions/add-project@v0.1.0
         with:
           project_name: ${{ github.event.inputs.project_name }}
           display_name: ${{ github.event.inputs.display_name }}
