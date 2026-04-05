@@ -9,6 +9,6 @@
     "github": "https://github.com/ddproxy/registry-client",
     "gitea": null
   },
-  "latestVersion": "v0.0.0",
+  "latestVersion": "v0.1.0",
   "license": "MIT"
 }

@@ -1,0 +1,21 @@
+[
+  {
+    "version": "v0.1.0",
+    "date": "2026-04-05",
+    "changelog": [
+      "Setting up projects in a registry",
+      "testing",
+      "documenting.."
+    ],
+    "assets": {
+      "source": [
+        "https://github.com/ddproxy/registry-client"
+      ]
+    },
+    "repoLinks": {
+      "githubTag": null,
+      "giteaTag": null
+    },
+    "license": "MIT"
+  }
+]
