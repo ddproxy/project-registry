@@ -9,21 +9,27 @@ on:
       display_name:
         description: 'Display name (auto-generated on create if blank)'
         required: false
+        default: ''
       description:
         description: 'Project description'
         required: false
+        default: ''
       repo_github:
         description: 'GitHub repository URL'
         required: false
+        default: ''
       repo_gitea:
         description: 'Gitea repository URL'
         required: false
+        default: ''
       tags:
         description: 'Comma-separated tags'
         required: false
+        default: ''
       license:
         description: 'License identifier (defaults to MIT on create)'
         required: false
+        default: ''
 
 permissions:
   contents: write
@@ -44,4 +50,4 @@ jobs:
           license: ${{ github.event.inputs.license }}
           registry_repo: ${{ github.event.repository.name }}
           registry_owner: ${{ github.event.repository.owner.login }}
-          github_token: ${{ secrets.REGISTRY_TOKEN || secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}

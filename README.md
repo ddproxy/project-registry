@@ -55,4 +55,4 @@ Projects that include the [project-template](https://github.com/ddproxy/project-
 
 | Secret | Purpose |
 |--------|---------|
-| `REGISTRY_TOKEN` | Token with write access to this repository (used by calling repos) |
+| `REGISTRY_TOKEN` | Token with `actions:write` on this repository (used by calling repos to trigger workflows). No `contents:write` needed in the calling repo — writes happen here under this repo's own permissions. |
